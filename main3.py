@@ -33,8 +33,9 @@ def save_password():
     check=messagebox.askyesno(message=f"This is what you've entered : \n  Website: {website}, Email : {email}, Password :{password}. Do you want to save?")
     if check:
         try:
-            with open("data.json") as data:
-                uploaded=json.load(data)
+            with open("data.json","r") as data:
+                uploaded = json.load(data) if data.read().strip() else {}
+
         except FileNotFoundError:
             with open("data.json", "w") as data:
                 json.dump(new_data, data, indent=4)
